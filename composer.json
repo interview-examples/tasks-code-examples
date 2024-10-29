@@ -1,0 +1,31 @@
+{
+  "name": "php-projects/interview-tasks",
+  "description": "Examples, Solutions for interview",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "vitaly_root",
+      "email": "vit.trakhtenberg@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "PHPInterviewTasks\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PHPInterviewTasks\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
