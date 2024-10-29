@@ -72,4 +72,26 @@ class PgrammerTasks
 
         return $res;
     }
+
+    /**
+     * The function takes an array of integers as an argument and
+     * returns a dictionary or associative array where the key is an integer from
+     * an input array and the value is the count of occurrences of that number in the array
+     *
+     * @param array $arr
+     * @return array|null
+     */
+    public static function countOccurrences(array $arr): ?array
+    {
+        $result = [];
+        foreach ($arr as $value) {
+            if (!isset($result[$value])) {
+                $result[$value] = 1;
+            } else {
+                $result[$value]++;
+            }
+        }
+
+        return $result;
+    }
 }
