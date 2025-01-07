@@ -1,11 +1,19 @@
 <?php
 function find_uniq($arr)
 {
-    $frequency = array_count_values(array_map('strval',$arr));
+    $counts = [];
 
-    foreach ($frequency as $key => $value) {
+    foreach ($arr as $num) {
+        $key = (string)$num; // Преобразуем в строку для использования в качестве ключа
+        if (!isset($counts[$key])) {
+            $counts[$key] = 0;
+        }
+        $counts[$key]++;
+    }
+
+    foreach ($counts as $key => $value) {
         if ($value === 1) {
-            return (+$key);
+            return (float)$key == (int)$key ? (int)$key : (float)$key; // Преобразуем обратно в соответствующий тип
         }
     }
 }
