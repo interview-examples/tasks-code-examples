@@ -11,20 +11,6 @@ function isFibonacci($n)
     return isPerfectSquare(5 * $n * $n + 4) || isPerfectSquare(5 * $n * $n - 4);
 }
 
-function findDivisors($n)
-{
-    $divisors = [];
-    for ($i = 2; $i * $i <= $n; $i++) {
-        if ($n % $i === 0) {
-            $pair = [$i, $n / $i];
-            if ($pair[0] < $pair[1]) {
-                $divisors[] = $pair;
-            }
-        }
-    }
-    return $divisors;
-}
-
 function productFib($prod)
 {
     $result = [0, 0, false];
