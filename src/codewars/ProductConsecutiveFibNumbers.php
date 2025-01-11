@@ -1,33 +1,15 @@
 <?php
-function isPerfectSquare($x): bool
-{
-    $s = (int)sqrt($x);
-    return $s * $s === $x;
-}
-
-function isFibonacci($n)
-{
-    // Следствие из формулы Бине - является ли 5*n^2 + 4 или 5*n^2 - 4 полным квадратом
-    return isPerfectSquare(5 * $n * $n + 4) || isPerfectSquare(5 * $n * $n - 4);
-}
 
 function productFib($prod)
 {
-    $result = [0, 0, false];
-    for ($i = 2; $i * $i <= $prod; $i++) {
-        if ($prod % $i === 0) {
-            $pair = [$i, $prod / $i];
-            if ($pair[0] < $pair[1]) {
-                if (isFibonacci($pair[0]) && isFibonacci($pair[1])) {
-                    $result = [$pair[0], $pair[1], true];
-                    break;
-                } else {
-                    $result = [$pair[0], $pair[1], false];
-                }
-            }
-        }
+    $a = 0;
+    $b = 1;
+    while ($a * $b < $prod) {
+        $temp = $b;
+        $b = $a + $b;
+        $a = $temp;
     }
-    return $result;
+    return [$a, $b, $a * $b === $prod];
 }
 
 var_dump(productFib(714)); echo PHP_EOL; // test passed
