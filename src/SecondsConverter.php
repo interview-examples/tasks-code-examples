@@ -12,25 +12,31 @@ function secondsConvertToHuman(int $seconds): string
     $minute = intdiv(($seconds % $hour_duration), 60);
     $second = $seconds % 60;
 
-    if ($year > 0) {
-        $result .= $year . " year" . ($year > 1 ? "s" : "") . " ";
-    }
-    if ($day > 0) {
-        $result .= ($year !== 0 && $hour === 0 && $minute === 0 && $second === 0 ? "and " : "") . $day . " day" . ($day > 1 ? "s" : "") . " ";
-    }
-    if ($hour > 0) {
-        $result .= (($year !== 0 || $day !==0) && $minute === 0 && $second === 0 ? "and " : "") . $hour . " hour" . ($hour > 1 ? "s" : "") . " ";
-    }
-    if ($minute > 0) {
-        $result .= (($year !== 0 || $hour !== 0) && $second === 0 ? "and " : "") . $minute . " minute" . ($minute > 1 ? "s" : "") . " ";
-    }
-    if ($second > 0) {
-        $result .= ($year !== 0 ||$hour !== 0 || $minute !== 0 ? "and " : "") . $second . " second" . ($second > 1 ? "s" : "");
-    }
-
-    return $result;
+    return formatDuration($year, $day, $hour, $minute, $second);
 }
 
+function formatDuration(int $year, int $day, int $hour, int $minute, int $second): string
+{
+    $parts = [
+        ['value' => $year, 'singular' => 'year', 'plural' => 'years'],
+        ['value' => $day, 'singular' => 'day', 'plural' => 'days'],
+        ['value' => $hour, 'singular' => 'hour', 'plural' => 'hours'],
+        ['value' => $minute, 'singular' => 'minute', 'plural' => 'minutes'],
+        ['value' => $second, 'singular' => 'second', 'plural' => 'seconds'],
+    ];
+
+    $resultParts = [];
+    foreach ($parts as $part) {
+        if ($part['value'] > 0) {
+            $resultParts[] = $part['value'] . ' ' . ($part['value'] > 1 ? $part['plural'] : $part['singular']);
+        }
+    }
+
+    $last = array_pop($resultParts);
+    $resultParts ? implode(', ', $resultParts) . ' and ' . $last : $last;
+
+    return $resultParts ? implode(', ', $resultParts) . ' and ' . $last : $last;
+}
 
 echo (secondsConvertToHuman(52)); echo PHP_EOL;
 echo (secondsConvertToHuman(60)); echo PHP_EOL;
