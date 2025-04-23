@@ -94,4 +94,18 @@ class PgrammerTasks
 
         return $result;
     }
+
+    /**
+     * The task requires you to design a PHP function that calculates
+     * the minimum total time required to process a list of tasks given their
+     * processing times and a concurrency limit.
+     *
+     * @param array $arr
+     * @param int $number_concurency
+     * @return int|null
+     */
+    public function optimizedResourceAllocation(array $arr, int $number_concurency): ?int
+    {
+        return null;
+    }
 }
